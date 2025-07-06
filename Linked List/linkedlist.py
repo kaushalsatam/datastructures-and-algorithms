@@ -113,6 +113,36 @@ class LinkedList:
         self.length += 1
         return True
 
+    # method to remove Node at a particular index from the Linked List
+    def remove(self, index):
+        if index >= self.length or index < 0:
+            return None
+        elif index == 0:
+            return self.pop_first()
+        elif index == self.length:
+            return self.pop()
+        pre = self.get(index - 1)
+        temp = pre.next
+        pre.next = temp.next
+        temp.next = None
+        self.length -= 1
+        return temp
+
+    # method to reverse the Linked List
+    def reverse(self):
+        # reverse the head and tail
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+        after = temp.next
+        before = None
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
+
 my_linked_list = LinkedList(11)
 my_linked_list.append(12)
 my_linked_list.append(13)
@@ -133,4 +163,10 @@ my_linked_list.set_value(3, 69)
 my_linked_list.print_list()
 print("Linked List after inserting node at position (3)")
 my_linked_list.insert(3, 18)
+my_linked_list.print_list()
+print("Linked List after removing node at position (3)")
+my_linked_list.remove(3)
+my_linked_list.print_list()
+print("Reversed Linked List")
+my_linked_list.reverse()
 my_linked_list.print_list()
