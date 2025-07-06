@@ -76,6 +76,43 @@ class LinkedList:
         self.length -= 1
         return temp
 
+    # method to get value of the Node from a particular index
+    def get(self, index):
+        if index >= self.length or index < 0:
+            return None
+        temp = self.head
+        # count = 0
+        # while count != index:
+        #     temp = temp.next
+        #     count += 1
+        # underscore _ is used because the value is not going to be used in the loop
+        for _ in range(index):
+            temp = temp.next
+        return temp
+
+    # method to set value of the Node at a particular index
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp.value == None:
+            return False
+        temp.value = value
+        return True
+
+    # method to insert a Node into the Linked List at a particular index
+    def insert(self, index, value):
+        if index >= self.length or index < 0:
+            return False
+        elif index == 0:
+            return self.prepend(value)
+        elif index == self.length:
+            return self.append(value)
+        temp = self.get(index - 1)
+        new_node = Node(value)
+        new_node.next = temp.next
+        temp.next = new_node
+        self.length += 1
+        return True
+
 my_linked_list = LinkedList(11)
 my_linked_list.append(12)
 my_linked_list.append(13)
@@ -90,4 +127,10 @@ print("Linked List after pop first")
 my_linked_list.pop_first()
 my_linked_list.pop_first()
 my_linked_list.print_list()
-
+print(f"Node at index 3: {my_linked_list.get(3)}")
+print("Linked List after set value at position (3)")
+my_linked_list.set_value(3, 69)
+my_linked_list.print_list()
+print("Linked List after inserting node at position (3)")
+my_linked_list.insert(3, 18)
+my_linked_list.print_list()
