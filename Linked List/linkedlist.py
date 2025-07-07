@@ -100,7 +100,7 @@ class LinkedList:
 
     # method to insert a Node into the Linked List at a particular index
     def insert(self, index, value):
-        if index >= self.length or index < 0:
+        if index > self.length or index < 0:
             return False
         elif index == 0:
             return self.prepend(value)
@@ -119,7 +119,7 @@ class LinkedList:
             return None
         elif index == 0:
             return self.pop_first()
-        elif index == self.length:
+        elif index == self.length - 1:
             return self.pop()
         pre = self.get(index - 1)
         temp = pre.next
